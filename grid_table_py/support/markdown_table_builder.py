@@ -7,11 +7,15 @@ import pandas as pd
 
 
 class MarkdownTableBuilder:
-    def __init__(self, data: pd.DataFrame | List | None = None,
-                 labels: pd.Series | List | None = None):
+    def __init__(self, data: pd.DataFrame | List | np.ndarray | None = None,
+                 labels: pd.Series | List | np.ndarray | None = None):
         self.data: pd.DataFrame = pd.DataFrame(data=deepcopy(data))
-        if type(data) != pd.DataFrame:
-            self.data = self.data.T  # Probably
+        if len(data) == len(labels):
+            match type(data):
+                case pd.DataFrame | np.ndarray:
+                    data = data.T
+                case List:
+                    data = np.array(data).T
 
         if labels is None and type(data) == pd.DataFrame:
             # Infer Markdown Table labels from the data frame if not explicitly provided and they are present.
@@ -70,6 +74,7 @@ class MarkdownTableBuilder:
                 )
 
         width_budget = table_width - n_cols * 3 - 1  # Accounts for borders and border whitespace
+        mean_col_lengths = np.sqrt(mean_col_lengths)  # For balance
         relative_reconciled_lengths = np.array(
             mean_col_lengths / np.sum(mean_col_lengths) * width_budget, dtype=int)
         if np.sum(relative_reconciled_lengths) < width_budget:

@@ -1,10 +1,10 @@
 # Press the green button in the gutter to run the script.
 import sys
 
+from grid_table_py.grid_table_py import run
+
 if __name__ == '__main__':
-    path = sys.argv[1]
-    outpath = sys.argv[2]
-    print(sys.argv.__len__())
+    run()
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

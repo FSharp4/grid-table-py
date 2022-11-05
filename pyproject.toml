@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "grid-table-py"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 license = "MIT"
 authors = ["FSharp4 <33583307+FSharp4@users.noreply.github.com>"]

@@ -77,7 +77,7 @@ def interpret_table_from_snippet(text: str, out: List | None = None) -> List[Mar
         while number_of_divisors(line) == n_divisors:
             marked_lines[index] = True
             row_entries = tokenize(line)
-            entries = np.append(entries, row_entries)
+            entries = np.vstack([entries, row_entries])
             index += 1
             line = lines[index]
 
